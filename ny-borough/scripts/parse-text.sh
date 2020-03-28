@@ -9,7 +9,7 @@ queens=$(cat $file | grep Queens -A 2 | sed "s/[^0-9]*//" | tr -d '\n' | awk '{p
 staten=$(cat $file | grep "Staten Island" -A 2 | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
 bronx=$(cat $file | grep "Bronx" -A 2 | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
 
-export TX=GMT
+export TZ=GMT
 last_updated=$(date +"%Y-%m-%d %H:%M:%S")
 
 echo "Brooklyn: $brooklyn"
