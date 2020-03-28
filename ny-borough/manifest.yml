@@ -1,0 +1,10 @@
+---
+applications:
+  - name: corona-borough-scraper-drb
+    memory: 128M
+    instances: 0
+    docker:
+      image: drbathgate/ny-borough-scrape:3
+    services:
+      - corona-db
+    no-route: true

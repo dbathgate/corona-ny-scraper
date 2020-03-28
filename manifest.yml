@@ -1,0 +1,13 @@
+---
+applications:
+  - name: corona-scraper-drb
+    memory: 128M
+    instances: 1
+    path: publish
+    command: "cd ${HOME} && exec ./CoronaNyScaper --server.urls http://0.0.0.0:${PORT}"
+    buildpacks:
+      - binary_buildpack
+    services:
+      - corona-db
+    env:
+      ASPNETCORE_ENVIRONMENT: Production
