@@ -10,21 +10,18 @@ namespace CoronaNyScaper.Model
         
         [Key]
         [Column("last_updated")]
-        public DateTime last_updated { get; set; }
+        public DateTime LastUpdated { get; set; }
         
         [Column("suffolk")]
-        public int suffolk { get; set; }
+        public int Suffolk { get; set; }
         
         [Column("nassau")]
-        public int nassau { get; set; }
+        public int Nassau { get; set; }
         
         [Column("nyc")]
-        public int nyc { get; set; }
+        public int Nyc { get; set; }
         
         [Column("state")]
-        public int state { get; set; }
-        
-        [Column("newsday_last_updated")]
-        public DateTime newsday_last_updated { get; set; }
+        public int State { get; set; }
     }
 }
