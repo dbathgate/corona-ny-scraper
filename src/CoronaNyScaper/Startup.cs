@@ -1,5 +1,4 @@
 using CoronaNyScaper.Context;
-using CoronaNyScaper.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,8 +25,6 @@ namespace CoronaNyScaper
         {
             services.AddControllers();
 
-            services.AddTransient<INyDataRepository, NyDataRepository>();
-            
             services.AddDbContext<MetricDatabaseContext>(o => o.UseNpgsql(Configuration));
             
             services.AddTask<MigrateDbContextTask<MetricDatabaseContext>>(ServiceLifetime.Scoped);

@@ -3,6 +3,7 @@ using System;
 using CoronaNyScaper.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CoronaNyScaper.Migrations
@@ -18,33 +19,122 @@ namespace CoronaNyScaper.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("CoronaNyScaper.Model.NyDataEntity", b =>
+            modelBuilder.Entity("CoronaNyScaper.Model.NyBoroughDeathsEntity", b =>
                 {
-                    b.Property<DateTime>("last_updated")
+                    b.Property<DateTime>("LastUpdated")
                         .HasColumnName("last_updated")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("nassau")
+                    b.Property<int>("Bronx")
+                        .HasColumnName("bronx")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Brooklyn")
+                        .HasColumnName("brooklyn")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Manhattan")
+                        .HasColumnName("manhattan")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Queens")
+                        .HasColumnName("queens")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Staten")
+                        .HasColumnName("staten")
+                        .HasColumnType("integer");
+
+                    b.HasKey("LastUpdated");
+
+                    b.ToTable("corona_borough_deaths");
+                });
+
+            modelBuilder.Entity("CoronaNyScaper.Model.NyBoroughEntity", b =>
+                {
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnName("last_updated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Bronx")
+                        .HasColumnName("bronx")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Brooklyn")
+                        .HasColumnName("brooklyn")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Manhattan")
+                        .HasColumnName("manhattan")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Queens")
+                        .HasColumnName("queens")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Staten")
+                        .HasColumnName("staten")
+                        .HasColumnType("integer");
+
+                    b.HasKey("LastUpdated");
+
+                    b.ToTable("corona_boroughs");
+                });
+
+            modelBuilder.Entity("CoronaNyScaper.Model.NyBoroughHospitalizations", b =>
+                {
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnName("last_updated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Bronx")
+                        .HasColumnName("bronx")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Brooklyn")
+                        .HasColumnName("brooklyn")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Manhattan")
+                        .HasColumnName("manhattan")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Queens")
+                        .HasColumnName("queens")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Staten")
+                        .HasColumnName("staten")
+                        .HasColumnType("integer");
+
+                    b.HasKey("LastUpdated");
+
+                    b.ToTable("corona_borough_hospitalizations");
+                });
+
+            modelBuilder.Entity("CoronaNyScaper.Model.NyDataEntity", b =>
+                {
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnName("last_updated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Nassau")
                         .HasColumnName("nassau")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("newsday_last_updated")
-                        .HasColumnName("newsday_last_updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("nyc")
+                    b.Property<int>("Nyc")
                         .HasColumnName("nyc")
                         .HasColumnType("integer");
 
-                    b.Property<int>("state")
+                    b.Property<int>("State")
                         .HasColumnName("state")
                         .HasColumnType("integer");
 
-                    b.Property<int>("suffolk")
+                    b.Property<int>("Suffolk")
                         .HasColumnName("suffolk")
                         .HasColumnType("integer");
 
-                    b.HasKey("last_updated");
+                    b.HasKey("LastUpdated");
 
                     b.ToTable("corona_ny");
                 });
