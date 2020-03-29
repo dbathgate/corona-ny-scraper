@@ -1,0 +1,1 @@
+curl https://projects.newsday.com/assets/corona-widget/ -L -o newsday.json

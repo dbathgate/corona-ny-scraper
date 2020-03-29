@@ -20,11 +20,11 @@ queens_deaths=$(cat $file_deaths | grep Queens| sed "s/[^0-9]*//" | tr -d '\n' |
 staten_deaths=$(cat $file_deaths | grep "Staten Island" | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $4}')
 bronx_deaths=$(cat $file_deaths | grep "Bronx" | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $4}')
 
-brooklyn_hospitalizations=$(cat $file_hospitalizations | grep Brooklyn | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $3}')
-manhattan_hospitalizations=$(cat $file_hospitalizations | grep Manhattan | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $3}')
-queens_hospitalizations=$(cat $file_hospitalizations | grep Queens| sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $3}')
-staten_hospitalizations=$(cat $file_hospitalizations | grep "Staten Island" | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $3}')
-bronx_hospitalizations=$(cat $file_hospitalizations | grep "Bronx" | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $3}')
+brooklyn_hospitalizations=$(cat $file_hospitalizations | grep Brooklyn | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
+manhattan_hospitalizations=$(cat $file_hospitalizations | grep Manhattan | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
+queens_hospitalizations=$(cat $file_hospitalizations | grep Queens| sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
+staten_hospitalizations=$(cat $file_hospitalizations | grep "Staten Island" | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
+bronx_hospitalizations=$(cat $file_hospitalizations | grep "Bronx" | sed "s/[^0-9]*//" | tr -d '\n' | awk '{print $1}')
 
 export TZ=GMT
 last_updated=$(date +"%Y-%m-%d %H:%M:%S")

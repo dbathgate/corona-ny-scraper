@@ -1,6 +1,7 @@
 #!/bin/sh
+file=$1
 
-cat insert.sql
+cat $file
 
 PGSQL_EXISTS=$(echo $VCAP_SERVICES | jq '.["postgresql-10-odb"]')
 
@@ -19,6 +20,4 @@ else
 fi
 
 export PGPASSWORD=$DB_PASSWORD
-psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f insert.sql
-psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f insert_deaths.sql
-psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f insert_hospitalizations.sql
+psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f $file
