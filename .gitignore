@@ -38,3 +38,5 @@ msbuild.wrn
 
 *.pdf
 *.txt
+
+publish/

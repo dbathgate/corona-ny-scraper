@@ -20,3 +20,5 @@ fi
 
 export PGPASSWORD=$DB_PASSWORD
 psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f insert.sql
+psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f insert_deaths.sql
+psql -h $DB_HOST -d $DB_NAME -U $DB_USERNAME -w -f insert_hospitalizations.sql
