@@ -1,111 +1,44 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using CoronaNyScaper.Context;
+using System.Net.Mime;
+using System.Threading.Tasks;
 using CoronaNyScaper.Model;
+using CoronaNyScaper.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoronaNyScaper.Controllers
 {
     [ApiController]
     [Route("/api/search/boroughs")]
+    [Produces(MediaTypeNames.Application.Json)]
     public class BoroughsController : Controller
     {
-        private readonly MetricDatabaseContext _databaseContext;
+        private readonly IBoroughDataRepository _repository;
 
-        public BoroughsController(MetricDatabaseContext databaseContext)
+        public BoroughsController(IBoroughDataRepository repository)
         {
-            this._databaseContext = databaseContext;
+            _repository = repository;
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<NyBoroughEntity>), 200)]
-        public IActionResult Get([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        [ProducesResponseType(typeof(List<NyBorough>), 200)]
+        public async Task<ActionResult<List<NyBorough>>> Get([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
-
-            var nyDataEntity = _databaseContext.NyBoroughs
-                .GroupBy(g => new
-                {
-                    g.Bronx,
-                    g.Brooklyn,
-                    g.Manhattan,
-                    g.Staten,
-                    g.Queens
-                })
-                .Select(s => new
-                {
-                    s.Key.Bronx,
-                    s.Key.Brooklyn,
-                    s.Key.Manhattan,
-                    s.Key.Staten,
-                    s.Key.Queens,
-                    LastUpdated = s.Min(s => s.LastUpdated)
-                })
-                .Where(s => s.LastUpdated >= startDate && s.LastUpdated <= endDate)
-                .OrderByDescending(s => s.LastUpdated)
-                .ToList();
-            
-            return Ok(nyDataEntity);
-        }
-        
-        [HttpGet("deaths")]
-        [ProducesResponseType(typeof(List<NyBoroughEntity>), 200)]
-        public IActionResult GetDeaths([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
-        {
-
-            var nyDataEntity = _databaseContext.NyBoroughDeaths
-                .GroupBy(g => new
-                {
-                    g.Bronx,
-                    g.Brooklyn,
-                    g.Manhattan,
-                    g.Staten,
-                    g.Queens
-                })
-                .Select(s => new
-                {
-                    s.Key.Bronx,
-                    s.Key.Brooklyn,
-                    s.Key.Manhattan,
-                    s.Key.Staten,
-                    s.Key.Queens,
-                    LastUpdated = s.Min(s => s.LastUpdated)
-                })
-                .Where(s => s.LastUpdated >= startDate && s.LastUpdated <= endDate)
-                .OrderByDescending(s => s.LastUpdated)
-                .ToList();
-            
-            return Ok(nyDataEntity);
+            return await _repository.CasesByDateRange(startDate, endDate);
         }
         
         [HttpGet("hospitalizations")]
-        [ProducesResponseType(typeof(List<NyBoroughEntity>), 200)]
-        public IActionResult GetHospitalizations([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        [ProducesResponseType(typeof(List<NyBorough>), 200)]
+        public  async Task<ActionResult<List<NyBorough>>> GetHospitalizations([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
+            return await _repository.HospitalizationsByDateRange(startDate, endDate);   
+        }
 
-            var nyDataEntity = _databaseContext.NyBoroughsHospitalizations
-                .GroupBy(g => new
-                {
-                    g.Bronx,
-                    g.Brooklyn,
-                    g.Manhattan,
-                    g.Staten,
-                    g.Queens
-                })
-                .Select(s => new
-                {
-                    s.Key.Bronx,
-                    s.Key.Brooklyn,
-                    s.Key.Manhattan,
-                    s.Key.Staten,
-                    s.Key.Queens,
-                    LastUpdated = s.Min(s => s.LastUpdated)
-                })
-                .Where(s => s.LastUpdated >= startDate && s.LastUpdated <= endDate)
-                .OrderByDescending(s => s.LastUpdated)
-                .ToList();
-            
-            return Ok(nyDataEntity);
+        [HttpGet("deaths")]
+        [ProducesResponseType(typeof(List<NyBorough>), 200)]
+        public  async Task<ActionResult<List<NyBorough>>> getDeaths([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            return await _repository.DeathsByDateRange(startDate, endDate);   
         }
     }
 }

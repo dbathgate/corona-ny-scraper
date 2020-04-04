@@ -1,4 +1,7 @@
-using CoronaNyScaper.Context;
+using System.Reflection;
+using AutoMapper;
+using CoronaNyScaper.Data;
+using CoronaNyScaper.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +29,11 @@ namespace CoronaNyScaper
             services.AddControllers();
 
             services.AddDbContext<MetricDatabaseContext>(o => o.UseNpgsql(Configuration));
+
+            services.AddTransient<ICountyDataRepository, CountyDataRepository>();
+            services.AddTransient<IBoroughDataRepository, BoroughDataRepository>();
+            
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             
             services.AddTask<MigrateDbContextTask<MetricDatabaseContext>>(ServiceLifetime.Scoped);
             

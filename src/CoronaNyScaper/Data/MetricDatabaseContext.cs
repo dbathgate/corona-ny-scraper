@@ -1,7 +1,7 @@
 using CoronaNyScaper.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoronaNyScaper.Context
+namespace CoronaNyScaper.Data
 {
     public class MetricDatabaseContext : DbContext
     {
@@ -9,12 +9,12 @@ namespace CoronaNyScaper.Context
         {
             
         }
-        public DbSet<NyDataEntity> NyData { get; set; }
+        public DbSet<NyCountyEntity> NyCounties { get; set; }
         
         public DbSet<NyBoroughEntity> NyBoroughs { get; set; }
         
         public DbSet<NyBoroughDeathsEntity> NyBoroughDeaths { get; set; }
         
-        public DbSet<NyBoroughHospitalizations> NyBoroughsHospitalizations { get; set; }
+        public DbSet<NyBoroughHospitalizationsEntity> NyBoroughsHospitalizations { get; set; }
     }
 }

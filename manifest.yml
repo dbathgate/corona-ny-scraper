@@ -1,7 +1,7 @@
 ---
 applications:
   - name: corona-ny-api
-    memory: 128M
+    memory: 1G
     instances: 2
     path: publish
     command: "cd ${HOME} && exec ./CoronaNyScaper --server.urls http://0.0.0.0:${PORT}"

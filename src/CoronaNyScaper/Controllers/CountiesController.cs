@@ -1,48 +1,32 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using CoronaNyScaper.Context;
+using CoronaNyScaper.Data;
 using CoronaNyScaper.Model;
 using Microsoft.AspNetCore.Mvc;
+using CoronaNyScaper.Repository;
+using System.Threading.Tasks;
+using System.Net.Mime;
 
 namespace CoronaNyScaper.Controllers
 {
     [ApiController]
     [Route("/api/search/counties")]
+    [Produces(MediaTypeNames.Application.Json)]
     public class CountiesController: ControllerBase
     {
-        private readonly MetricDatabaseContext _databaseContext;
+        private readonly ICountyDataRepository _repository;
 
-        public CountiesController(MetricDatabaseContext databaseContext)
+        public CountiesController(ICountyDataRepository repository)
         {
-            this._databaseContext = databaseContext;
+            _repository = repository;
         }
         
         [HttpGet]
-        [ProducesResponseType(typeof(List<NyDataEntity>), 200)]
-        public IActionResult Get([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        [ProducesResponseType(typeof(List<NyCounty>), 200)]
+        public async Task<ActionResult<List<NyCounty>>> Get([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
-            var result = _databaseContext.NyData
-                .GroupBy(g => new
-                {
-                    g.Nassau,
-                    g.Suffolk,
-                    g.Nyc,
-                    g.State
-                })
-                .Select(s => new
-                {
-                    s.Key.Nassau,
-                    s.Key.Suffolk,
-                    s.Key.Nyc,
-                    s.Key.State,
-                    LastUpdated = s.Min(s => s.LastUpdated)
-                })
-                .Where(s => s.LastUpdated >= startDate && s.LastUpdated <= endDate)
-                .OrderByDescending(s => s.LastUpdated)
-                .ToList();
-            
-            return Ok(result);
+            return await _repository.GetByDateRange(startDate, endDate);   
         }
     }
 }

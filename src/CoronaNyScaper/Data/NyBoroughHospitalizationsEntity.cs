@@ -2,10 +2,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CoronaNyScaper.Model
+namespace CoronaNyScaper.Data
 {
-    [Table("corona_boroughs")]
-    public class NyBoroughEntity
+    [Table("corona_borough_hospitalizations")]
+    public class NyBoroughHospitalizationsEntity
     {
         [Key]
         [Column("last_updated")]
