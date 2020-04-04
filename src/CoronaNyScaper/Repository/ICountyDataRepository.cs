@@ -8,5 +8,7 @@ namespace CoronaNyScaper.Repository
     public interface ICountyDataRepository
     {
         Task<List<NyCounty>> GetByDateRange(DateTime startDate, DateTime endDate);
+
+        Task<List<NyCounty>> NewPerDay();
     }
 }

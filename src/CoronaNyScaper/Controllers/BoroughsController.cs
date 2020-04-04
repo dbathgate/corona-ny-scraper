@@ -40,5 +40,27 @@ namespace CoronaNyScaper.Controllers
         {
             return await _repository.DeathsByDateRange(startDate, endDate);   
         }
+
+        [HttpGet("new-per-day")]
+        [ProducesResponseType(typeof(List<NyBorough>), 200)]
+        public async Task<ActionResult<List<NyBorough>>> NewCasesPerDay()
+        {
+            return await _repository.NewCasesPerDay();
+        }
+
+        [HttpGet("hospitalizations/new-per-day")]
+        [ProducesResponseType(typeof(List<NyBorough>), 200)]
+        public async Task<ActionResult<List<NyBorough>>> NewHospitalizationsPerDay()
+        {
+            return await _repository.NewHospitalizationsPerDay();
+        }
+
+
+        [HttpGet("deaths/new-per-day")]
+        [ProducesResponseType(typeof(List<NyBorough>), 200)]
+        public async Task<ActionResult<List<NyBorough>>> NewDeathsPerDay()
+        {
+            return await _repository.NewHospitalizationsPerDay();
+        }
     }
 }

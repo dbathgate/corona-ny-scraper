@@ -12,5 +12,11 @@ namespace CoronaNyScaper.Repository
         Task<List<NyBorough>> HospitalizationsByDateRange(DateTime startDate, DateTime endDate);
 
         Task<List<NyBorough>> DeathsByDateRange(DateTime startDate, DateTime endDate);
+
+        Task<List<NyBorough>> NewCasesPerDay();
+
+        Task<List<NyBorough>> NewDeathsPerDay();
+
+        Task<List<NyBorough>> NewHospitalizationsPerDay();
     }
 }

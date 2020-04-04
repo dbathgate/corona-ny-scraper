@@ -4,7 +4,7 @@ applications:
     memory: 128M
     instances: 0
     docker:
-      image: drbathgate/ny-borough-scrape:8
+      image: drbathgate/ny-borough-scrape:9
     services:
       - corona-db
     no-route: true

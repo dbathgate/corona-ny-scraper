@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using CoronaNyScaper.Data;
 using CoronaNyScaper.Model;
 using Microsoft.AspNetCore.Mvc;
 using CoronaNyScaper.Repository;
@@ -27,6 +25,13 @@ namespace CoronaNyScaper.Controllers
         public async Task<ActionResult<List<NyCounty>>> Get([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             return await _repository.GetByDateRange(startDate, endDate);   
+        }
+
+        [HttpGet("new-per-day")]
+        [ProducesResponseType(typeof(List<NyCounty>), 200)]
+        public async Task<ActionResult<List<NyCounty>>> GetNewPerDay()
+        {
+            return await _repository.NewPerDay(); 
         }
     }
 }
