@@ -43,3 +43,5 @@ msbuild.wrn
 appsettings.Development.json
 
 publish/
+
+grafana-6.7.1*
