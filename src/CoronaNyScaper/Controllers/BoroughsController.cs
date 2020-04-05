@@ -36,7 +36,7 @@ namespace CoronaNyScaper.Controllers
 
         [HttpGet("deaths")]
         [ProducesResponseType(typeof(List<NyBorough>), 200)]
-        public  async Task<ActionResult<List<NyBorough>>> getDeaths([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        public  async Task<ActionResult<List<NyBorough>>> GetDeaths([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             return await _repository.DeathsByDateRange(startDate, endDate);   
         }
@@ -60,7 +60,7 @@ namespace CoronaNyScaper.Controllers
         [ProducesResponseType(typeof(List<NyBorough>), 200)]
         public async Task<ActionResult<List<NyBorough>>> NewDeathsPerDay()
         {
-            return await _repository.NewHospitalizationsPerDay();
+            return await _repository.NewDeathsPerDay();
         }
     }
 }
