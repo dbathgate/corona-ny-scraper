@@ -1,6 +1,7 @@
 applications:
 - name: drb-corona
   memory: 256M
+  instances: 4
   buildpacks:
   - binary_buildpack
   command: ./run.sh
