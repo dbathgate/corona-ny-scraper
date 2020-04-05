@@ -1,5 +1,7 @@
 # COVID-19 NY Data Collection & API
 
+![Grafana Dashboard](images/grafana-screenshot.png)
+
 ## API
 * https://corona-ny-api.apps.pcfone.io/
 
