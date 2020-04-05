@@ -136,7 +136,7 @@ namespace CoronaNyScaper.Repository
             return CalculateNewCases(result);
         }
 
-                public async Task<List<NyBorough>> NewDeathsPerDay()
+        public async Task<List<NyBorough>> NewDeathsPerDay()
         {
             var result = await _databaseContext.NyBoroughDeaths
                 .GroupBy(g => new
