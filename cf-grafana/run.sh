@@ -2,7 +2,7 @@
 
 PGSQL_EXISTS=$(echo $VCAP_SERVICES | jq '.["postgresql-10-odb"]')
 
-if [ "$MYSQL_EXISTS" = "null" ]; then
+if [ "$PGSQL_EXISTS" = "null" ]; then
 
    echo "PostgreSQL Service not bound..."
    echo "Running grana using sqlite..."
